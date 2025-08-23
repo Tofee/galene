@@ -51,6 +51,8 @@ func main() {
 		"require use of TURN relays for all media traffic")
 	flag.StringVar(&turnserver.Address, "turn", "auto",
 		"built-in TURN server `address` (\"\" to disable)")
+	flag.StringVar(&turnserver.Realm, "realm", "galene.org",
+		"built-in TURN realm hostname")
 	flag.Parse()
 
 	if udpRange != "" {

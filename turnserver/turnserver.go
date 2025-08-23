@@ -16,6 +16,7 @@ import (
 var username string
 var password string
 var Address string
+var Realm string
 
 var server struct {
 	mu        sync.Mutex
@@ -187,9 +188,9 @@ func Start() error {
 	log.Printf("Starting built-in TURN server on %v", addr.String())
 
 	server.server, err = turn.NewServer(turn.ServerConfig{
-		Realm: "galene.org",
+		Realm: Realm,
 		AuthHandler: func(u, r string, src net.Addr) ([]byte, bool) {
-			if u != username || r != "galene.org" {
+			if u != username || r != Realm {
 				return nil, false
 			}
 			return turn.GenerateAuthKey(u, r, password), true
